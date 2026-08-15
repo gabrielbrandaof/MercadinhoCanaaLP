@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<!--
+  Arquivo: index.html
+  Descrição: Página principal do Mercadinho Canaã.
+  Notas de manutenção:
+    - Estrutura semântica: `header`, `main`, `section`.
+    - Mantenha atributos ARIA ao alterar elementos.
+    - CSS em `style.css`; lógica em `script.js`; produtos em `produtos.js`.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mercadinho Canaã — Pertinho de Você</title>
+  <meta name="description" content="Mercadinho de vizinhança no Conjunto Canaã, São Luís. Produtos frescos, preços justos e atendimento de quem te conhece pelo nome." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Skip link de acessibilidade -->
+  <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+
+  <!-- WhatsApp FAB: botão flutuante para contato rápido.
+       Atualize o número em `wa.me/` e mantenha `rel="noopener"` para segurança. -->
+  <a class="whatsapp-fab"
+     href="https://wa.me/5598987128631"
+     target="_blank"
+     rel="noopener"
+     aria-label="Falar pelo WhatsApp">💬</a>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║ HEADER                       ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <header role="banner">
+    <div class="container header-inner">
+      <a href="#inicio" class="logo" aria-label="Mercadinho Canaã — Início">
+        Mercadinho Canaã<span></span>
+      </a>
+
+      <nav aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#produtos">Produtos</a>
+        <a href="#como-funciona">Como Funciona</a>
+        <a href="#sobre">Sobre Nós</a>
+        <a href="https://wa.me/5598987128631?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Mercadinho%20Cana%C3%A3%20e%20gostaria%20de%20saber%20mais.">Contato</a>
+      </nav>
+
+      <!-- Botão do carrinho -->
+      <button
+        class="carrinho-btn-header"
+        onclick="toggleCarrinho()"
+        aria-label="Abrir carrinho de compras"
+        title="Meu Carrinho"
+      >
+        🛒
+        <span id="carrinho-badge" aria-live="polite" aria-label="itens no carrinho"></span>
+      </button>
+
+      <button
+        class="menu-toggle"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        id="menu-toggle"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Menu mobile -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Navegação mobile" aria-hidden="true">
+      <a href="#inicio"        onclick="closeMobile()">Início</a>
+      <a href="#produtos"      onclick="closeMobile()">Produtos</a>
+      <a href="#sobre"         onclick="closeMobile()">Sobre Nós</a>
+      <a href="#como-funciona" onclick="closeMobile()">Como Funciona</a>
+      <a href="https://wa.me/5598987128631?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Mercadinho%20Cana%C3%A3%20e%20gostaria%20de%20saber%20mais."       onclick="closeMobile()">Contato</a>
+      <button class="btn btn-primary" onclick="closeMobile(); toggleCarrinho();" style="margin-top:var(--s5);width:100%;justify-content:center;">🛒 Ver Carrinho</button>
+    </nav>
+  </header>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║ MAIN                         ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <main id="main-content">
+
+    <!-- ▸ HERO -->
+    <section id="inicio" aria-labelledby="hero-title">
+      <!-- Vídeo de fundo -->
+      <video
+        class="hero-video-bg"
+        autoplay muted loop playsinline preload="auto"
+        aria-hidden="true"
+      >
+        <source src="img/video.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-video-overlay" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-text">
+            <div class="hero-tag" role="text">O Mercadinho do Conjunto Canaã</div>
+            <h1 class="hero-title" id="hero-title">
+              Mercadinho<br><em>Canaã</em>
+            </h1>
+            <p class="hero-subtitle">
+              Produtos frescos, preços justos e o atendimento de quem te conhece pelo nome.
+            </p>
+            <p class="hero-body">
+              Do arroz de cada dia ao melhor folheado, o Mercadinho Canaã é o mercado do seu conjunto — ali do lado, sempre pronto pra te atender.
+            </p>
+            <div class="hero-actions">
+              <a href="#produtos" class="btn btn-primary">Ver Produtos</a>
+              <a href="https://wa.me/5598987128631?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20Mercadinho%20Cana%C3%A3%20e%20gostaria%20de%20saber%20mais." class="btn btn-secondary" target="_blank" rel="noopener">Fale Conosco</a>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="hero-card-stack">
+              <img src="img/logo.png" alt="Logo do Mercadinho Canaã" class="hero-logo" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▸ DIFERENCIAIS -->
+    <section id="diferenciais" aria-labelledby="diferenciais-title">
+      <div class="container">
+        <div class="diferenciais-header reveal">
+          <span class="section-eyebrow">Por que escolher</span>
+          <h2 class="section-title" id="diferenciais-title">Por que comprar<br>com a gente</h2>
+          <p class="section-subtitle">Compromisso com qualidade, agilidade e o bom atendimento de sempre.</p>
+        </div>
+        <div class="cards-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">🤝</div>
+            <h3 class="feature-title">Atendimento de Vizinho</h3>
+            <p class="feature-desc">Você não é só mais um cliente — é vizinho. Atendemos com cuidado e simpatia de sempre.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">🧅</div>
+            <h3 class="feature-title">Produtos Frescos</h3>
+            <p class="feature-desc">Selecionamos temperos, carnes e laticínios com cuidado, garantindo frescor todos os dias.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">💰</div>
+            <h3 class="feature-title">Preço Justo</h3>
+            <p class="feature-desc">Preços competitivos e promoções toda semana, para o seu dinheiro render mais.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">📍</div>
+            <h3 class="feature-title">Aqui no Conjunto</h3>
+            <p class="feature-desc">Na porta da sua casa. Monte seu pedido pelo site e venha buscar na loja sem espera.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▸ CATEGORIAS E PRODUTOS -->
+    <section id="produtos" aria-labelledby="produtos-title">
+      <div class="container">
+        <div class="produtos-header reveal">
+          <span class="section-eyebrow">Categorias</span>
+          <h2 class="section-title" id="produtos-title">Encontre tudo<br>o que precisa</h2>
+          <p class="section-subtitle">Navegue pelas nossas categorias, adicione ao carrinho e venha buscar na loja.</p>
+        </div>
+
+        <div class="categories-grid reveal" role="list" aria-label="Categorias de produtos">
+          <div class="category-chip" role="listitem" data-cat="tempero" onclick="irParaCategoria('tempero')" tabindex="0" onkeydown="if(event.key==='Enter')irParaCategoria('tempero')">
+            <span class="category-emoji" aria-hidden="true">🧅</span>
+            <span class="category-name">Temperos</span>
+          </div>
+          <div class="category-chip" role="listitem" data-cat="biscoitosDoces" onclick="irParaCategoria('biscoitosDoces')" tabindex="0" onkeydown="if(event.key==='Enter')irParaCategoria('biscoitosDoces')">
+            <span class="category-emoji" aria-hidden="true">🍪</span>
+            <span class="category-name">Biscoitos e doces</span>
+          </div>
+          <div class="category-chip" role="listitem" data-cat="salgados" onclick="irParaCategoria('salgados')" tabindex="0" onkeydown="if(event.key==='Enter')irParaCategoria('salgados')">
+            <span class="category-emoji" aria-hidden="true">🥖</span>
+            <span class="category-name">Salgados</span>
+          </div>
+          <div class="category-chip" role="listitem" data-cat="bebidas" onclick="irParaCategoria('bebidas')" tabindex="0" onkeydown="if(event.key==='Enter')irParaCategoria('bebidas')">
+            <span class="category-emoji" aria-hidden="true">🧃</span>
+            <span class="category-name">Bebidas</span>
+          </div>
+          <div class="category-chip" role="listitem" data-cat="mercearia" onclick="irParaCategoria('mercearia')" tabindex="0" onkeydown="if(event.key==='Enter')irParaCategoria('mercearia')">
+            <span class="category-emoji" aria-hidden="true">🛒</span>
+            <span class="category-name">Mercearia</span>
+          </div>
+          <div class="category-chip" role="listitem" data-cat="limpeza" onclick="irParaCategoria('limpeza')" tabindex="0" onkeydown="if(event.key==='Enter')irParaCategoria('limpeza')">
+            <span class="category-emoji" aria-hidden="true">🧹</span>
+            <span class="category-name">Limpeza</span>
+          </div>
+          <div class="category-chip" role="listitem" data-cat="higiene" onclick="irParaCategoria('higiene')" tabindex="0" onkeydown="if(event.key==='Enter')irParaCategoria('higiene')">
+            <span class="category-emoji" aria-hidden="true">🧴</span>
+            <span class="category-name">Higiene e Cuidados</span>
+          </div>
+          <div class="category-chip" role="listitem" data-cat="laticinios" onclick="irParaCategoria('laticinios')" tabindex="0" onkeydown="if(event.key==='Enter')irParaCategoria('laticinios')">
+            <span class="category-emoji" aria-hidden="true">🧀</span>
+            <span class="category-name">Laticínios</span>
+          </div>
+        </div>
+
+        <!--
+          A lista completa de produtos, organizada por categoria, é montada
+          automaticamente aqui pelo script.js lendo o catalogoProdutos (produtos.js).
+        -->
+        <div id="lista-produtos-categorias">
+          <!-- Blocos de categoria inseridos pelo script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ▸ OFERTAS DA SEMANA -->
+    <section id="ofertas" aria-labelledby="ofertas-title">
+      <div class="container">
+        <div class="ofertas-header">
+          <div class="reveal">
+            <span class="section-eyebrow">Promoções</span>
+            <h2 class="section-title" id="ofertas-title">Ofertas da Semana</h2>
+            <p class="section-subtitle">Aproveite os melhores preços do Mercadinho Canaã, com novidades toda semana.</p>
+          </div>
+        </div>
+
+        <!--
+          Grade de ofertas preenchida pelo script.js com os produtos
+          marcados como "destaque: true" no produtos.js.
+        -->
+        <div class="produtos-grid" id="ofertas-grid" aria-live="polite">
+          <!-- Cards de oferta inseridos pelo script.js -->
+        </div>
+
+        <div class="ofertas-cta reveal">
+          <p>Confira nossa seleção de produtos com preço especial e economize nas compras da semana.</p>
+          <a href="#produtos" class="btn btn-primary">Ver Todos os Produtos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▸ COMO FUNCIONA -->
+    <section id="como-funciona" aria-labelledby="como-title">
+      <div class="container">
+        <div class="reveal">
+          <span class="section-eyebrow">Simples assim</span>
+          <h2 class="section-title" id="como-title">Como fazer seu pedido</h2>
+          <p class="section-subtitle">Monte sua lista aqui no site e venha buscar na loja. Rápido e sem complicação.</p>
+        </div>
+        <div class="steps-grid" role="list">
+          <div class="step reveal" role="listitem">
+            <div class="step-num" aria-hidden="true">1</div>
+            <h3 class="step-title">Monte seu carrinho</h3>
+            <p class="step-desc">Navegue pelos produtos, clique em "Adicionar" e monte sua lista de compras aqui no site.</p>
+          </div>
+          <div class="step reveal" role="listitem">
+            <div class="step-num" aria-hidden="true">2</div>
+            <h3 class="step-title">Envie pelo WhatsApp</h3>
+            <p class="step-desc">Clique em "Enviar pedido pelo WhatsApp" e sua lista chega certinha para a gente confirmar.</p>
+          </div>
+          <div class="step reveal" role="listitem">
+            <div class="step-num" aria-hidden="true">3</div>
+            <h3 class="step-title">Retire na loja</h3>
+            <p class="step-desc">Passa aqui no Conjunto Canaã, busca seu pedido separadinho e pronto. Até logo! 😊</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▸ SOBRE NÓS -->
+    <section id="sobre" aria-labelledby="sobre-title">
+      <div class="container">
+        <div class="sobre-inner">
+          <div class="sobre-text reveal">
+            <span class="section-eyebrow">Nossa história</span>
+            <h2 class="section-title" id="sobre-title">O Mercadinho Canaã</h2>
+            <p>Nascido no Conjunto Canaã, em São Luís, o Mercadinho Canaã é mais que um mercadinho de bairro: é o lugar onde a vizinhança encontra qualidade, variedade e aquele atendimento de quem conhece o cliente pelo nome. Cuidamos de cada detalhe — da escolha dos produtos à simpatia no balcão — para que suas compras sejam sempre práticas e confiáveis.</p>
+
+            <div class="stats-grid" aria-label="Números do Mercadinho Canaã">
+              <div class="stat-card">
+                <div class="stat-num" aria-label="Fundado em 2026">2026</div>
+                <div class="stat-label">Ano de fundação</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num" aria-label="Mais de cem produtos disponíveis">+100</div>
+                <div class="stat-label">Produtos disponíveis</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num" aria-label="Clientes satisfeitos">😊</div>
+                <div class="stat-label">Clientes satisfeitos</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num" aria-label="Perto de você">📍</div>
+                <div class="stat-label">No seu conjunto</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sobre-visual reveal" aria-hidden="true">
+            <p class="sobre-visual-quote">
+              Um mercado que conhece você <em>pelo nome.</em>
+            </p>
+            <div class="sobre-icon-row">
+              <div class="sobre-icon">🥦</div>
+              <div class="sobre-icon">🍅</div>
+              <div class="sobre-icon">🍪</div>
+              <div class="sobre-icon">🧀</div>
+              <div class="sobre-icon">🍌</div>
+              <div class="sobre-icon">🥖</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▸ DEPOIMENTOS -->
+    <section id="depoimentos" aria-labelledby="dep-title">
+      <div class="container">
+        <div class="depoimentos-header reveal">
+          <span class="section-eyebrow">Clientes</span>
+          <h2 class="section-title" id="dep-title">Quem compra, aprova</h2>
+          <p class="section-subtitle">A satisfação de quem já faz parte da nossa clientela.</p>
+        </div>
+        <div class="depoimentos-grid">
+          <article class="depoimento-card reveal">
+            <div class="stars" aria-label="5 estrelas">
+              <span class="star" aria-hidden="true">★</span>
+              <span class="star" aria-hidden="true">★</span>
+              <span class="star" aria-hidden="true">★</span>
+              <span class="star" aria-hidden="true">★</span>
+              <span class="star" aria-hidden="true">★</span>
+            </div>
+            <p class="depoimento-text">Compro toda semana e tudo sempre fresquinho. É muito mais prático do que ir longe — tem tudo aqui no conjunto mesmo.</p>
+            <div>
+              <p class="depoimento-author">Moradora do conjunto</p>
+              <p class="depoimento-bairro">Conjunto Canaã</p>
+            </div>
+          </article>
+
+          <article class="depoimento-card reveal">
+            <div class="stars" aria-label="5 estrelas">
+              <span class="star" aria-hidden="true">★</span>
+              <span class="star" aria-hidden="true">★</span>
+              <span class="star" aria-hidden="true">★</span>
+              <span class="star" aria-hidden="true">★</span>
+              <span class="star" aria-hidden="true">★</span>
+            </div>
+            <p class="depoimento-text">Atendimento excelente e preços justos. Gosto muito de poder montar a lista pelo site antes de ir buscar.</p>
+            <div>
+              <p class="depoimento-author">Cliente satisfeita</p>
+              <p class="depoimento-bairro">Conjunto Canaã</p>
+            </div>
+          </article>
+
+          <article class="depoimento-card reveal">
+            <div class="stars" aria-label="5 estrelas">
+              <span class="star" aria-hidden="true">★</span>
+              <span class="star" aria-hidden="true">★</span>
+              <span class="star" aria-hidden="true">★</span>
+              <span class="star" aria-hidden="true">★</span>
+              <span class="star" aria-hidden="true">★</span>
+            </div>
+            <p class="depoimento-text">Produtos de qualidade e pessoal muito simpático. Recomendo para todo mundo do conjunto que quer praticidade sem sair de perto de casa.</p>
+            <div>
+              <p class="depoimento-author">Cliente recorrente</p>
+              <p class="depoimento-bairro">Conjunto Canaã</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▸ CTA FINAL -->
+    <section id="cta-final" aria-labelledby="cta-title">
+      <div class="container cta-final-inner">
+        <h2 class="cta-final-title" id="cta-title">Pronto para montar<br>seu pedido?</h2>
+        <p class="cta-final-sub">Monte seu carrinho aqui no site, envie pelo WhatsApp e venha buscar pertinho de você.</p>
+        <button class="btn btn-primary" onclick="document.getElementById('produtos').scrollIntoView({behavior:'smooth'}); setTimeout(toggleCarrinho, 800);" style="font-size:17px;padding:16px 36px;">
+          🛒 Montar Pedido
+        </button>
+      </div>
+    </section>
+
+    <!-- ▸ CONTATO -->
+    <section id="contato" aria-labelledby="contato-title">
+      <div class="container">
+        <div class="contato-inner">
+          <!-- Info -->
+          <div class="contato-info reveal">
+            <span class="section-eyebrow">Fale conosco</span>
+            <h2 class="section-title" id="contato-title">Fale com o<br>Mercadinho Canaã</h2>
+            <p class="section-subtitle" style="margin-bottom:var(--s6)">Estamos por perto para te atender. Tire dúvidas, faça sugestões ou converse sobre nossos produtos.</p>
+
+            <div class="info-cards">
+              <div class="info-card">
+                <div class="info-icon" aria-hidden="true">📍</div>
+                <div>
+                  <p class="info-label">Endereço</p>
+                  <p class="info-value">Avenida do Alumínio, Quadra 7, Casa 1B — Anil</p>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-icon" aria-hidden="true">📱</div>
+                <div>
+                  <p class="info-label">Telefone / WhatsApp</p>
+                  <p class="info-value">(98) 98712-8631</p>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-icon" aria-hidden="true">✉️</div>
+                <div>
+                  <p class="info-label">E-mail</p>
+                  <p class="info-value">mercadinhocanaa.slz@gmail.com</p>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-icon" aria-hidden="true">🕐</div>
+                <div>
+                  <p class="info-label">Horário de Funcionamento</p>
+                  <p class="info-value">Seg–Sáb: 8h às 19h<br>Domingo: Fechado</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formulário -->
+          <div class="reveal">
+            <form class="contato-form" id="contato-form" novalidate aria-label="Formulário de contato">
+              <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" placeholder="Seu nome completo" autocomplete="name" required aria-required="true" />
+              </div>
+              <div class="form-group">
+                <label for="telefone">Telefone / WhatsApp</label>
+                <input type="tel" id="telefone" name="telefone" placeholder="(98) 9xxxx-xxxx" autocomplete="tel" />
+              </div>
+              <div class="form-group">
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem" name="mensagem" placeholder="Como podemos te ajudar?" required aria-required="true"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="align-self:flex-start;width:100%;">Enviar Mensagem</button>
+              <div class="form-success" id="form-success" role="alert">
+                ✅ Mensagem enviada! Entraremos em contato em breve.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║ FOOTER                       ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#inicio" class="logo" aria-label="Mercadinho Canaã">Mercadinho Canaã<span></span></a>
+          <p>Mercadinho de vizinhança no Conjunto Canaã — praticidade, qualidade e aquele atendimento de quem te conhece.</p>
+        </div>
+
+        <nav aria-label="Links rápidos do rodapé">
+          <p class="footer-col-title">Links Rápidos</p>
+          <ul class="footer-links">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#produtos">Produtos</a></li>
+            <li><a href="#sobre">Sobre Nós</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Categorias de produtos do rodapé">
+          <p class="footer-col-title">Categorias</p>
+          <ul class="footer-links">
+            <li><a href="#produtos">Temperos</a></li>
+            <li><a href="#produtos">Biscoitos e Doces</a></li>
+            <li><a href="#produtos">Salgados</a></li>
+            <li><a href="#produtos">Bebidas</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <p class="footer-col-title">Redes Sociais</p>
+          <ul class="social-links">
+            <li>
+              <a href="https://www.instagram.com/mercadinhocanaa/?hl=pt-br" class="social-link" aria-label="Instagram do Mercadinho Canaã" target="_blank" rel="noopener">
+                <span class="social-icon" aria-hidden="true">📸</span>
+                Instagram
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/5598987128631" class="social-link" aria-label="WhatsApp do Mercadinho Canaã" target="_blank" rel="noopener">
+                <span class="social-icon" aria-hidden="true">💬</span>
+                WhatsApp
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Mercadinho Canaã. Todos os direitos reservados.</p>
+        <p>Feito com carinho em São Luís 🌱</p>
+      </div>
+    </div>
+  </footer>
+
+  <!--
+    Carregue produtos.js ANTES de script.js.
+    O script.js lê a variável `catalogoProdutos` definida em produtos.js.
+  -->
+  <script src="produtos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
