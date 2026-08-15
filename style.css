@@ -172,11 +172,13 @@ header {
 }
 .logo {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--white);
   letter-spacing: -.01em;
 }
+@media (min-width: 480px) { .logo { font-size: 20px; } }
+@media (min-width: 900px) { .logo { font-size: 22px; } }
 .logo span { color: var(--yellow); }
 
 nav { display: none; }
@@ -189,10 +191,34 @@ nav { display: none; }
   nav a {
     font-size: 14px;
     font-weight: 500;
-    color: rgba(255,255,255,.8);
-    transition: color .15s;
+    color: rgba(255,255,255,.55);
+    transition: color .25s, text-shadow .25s;
+    position: relative;
   }
   nav a:hover { color: var(--white); }
+
+  /* Link ativo: brilho amarelo-esverdeado */
+  nav a.nav-ativo {
+    color: var(--white);
+    text-shadow:
+      0 0 8px rgba(254,200,0,.9),
+      0 0 20px rgba(254,200,0,.5),
+      0 0 40px rgba(254,200,0,.2);
+  }
+  /* Sublinhado animado no link ativo */
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--yellow);
+    border-radius: 2px;
+    transition: width .3s ease;
+    box-shadow: 0 0 6px rgba(254,200,0,.8);
+  }
+  nav a.nav-ativo::after { width: 100%; }
 }
 
 .header-cta { display: none; }
@@ -277,14 +303,21 @@ nav { display: none; }
   transition: color .15s;
 }
 .mobile-nav a:hover { color: var(--yellow); }
+.mobile-nav a.nav-ativo {
+  color: var(--yellow);
+  text-shadow: 0 0 10px rgba(254,200,0,.6);
+}
 .mobile-nav .btn { margin-top: var(--s5); width: 100%; justify-content: center; }
 
 /* ─── HERO ──────────────────────────────────────────────── */
 #inicio {
   background: var(--green);
-  padding: var(--s9) 0 0;
+  padding: var(--s7) 0 0;
   overflow: hidden;
   position: relative;
+}
+@media (min-width: 600px) {
+  #inicio { padding: var(--s9) 0 0; }
 }
 
 .hero-video-bg {
@@ -416,7 +449,10 @@ nav { display: none; }
   display: flex;
   flex-wrap: wrap;
   gap: var(--s3);
-  transform: translateY(-12px);
+}
+@media (max-width: 400px) {
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
 }
 @media (min-width: 900px) {
   .hero-actions { transform: translateY(-28px); }
@@ -633,7 +669,12 @@ nav { display: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--s2);
+  gap: var(--s3);
+  flex-wrap: wrap;
+}
+@media (max-width: 360px) {
+  .produto-footer { flex-direction: column; align-items: flex-start; }
+  .btn-adicionar-carrinho { width: 100%; justify-content: center; }
 }
 .produto-price {
   font-size: 22px;

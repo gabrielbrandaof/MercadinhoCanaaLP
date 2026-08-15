@@ -88,24 +88,50 @@ function iniciarScrollReveal() {
   window._observarReveal = observarReveal;
 }
 
-// ─── HIGHLIGHT DE NAV ─────────────────────────────────────────────────────────
+// ─── HIGHLIGHT DE NAV (com efeito brilho) ────────────────────────────────────
 function iniciarNavHighlight() {
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('header nav a');
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+  const navLinks = document.querySelectorAll('header nav a, .mobile-nav a');
+
+  // Mapeia href → link para lookup rápido
+  function atualizarAtivo(idAtivo) {
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      const match = href === '#' + idAtivo;
+      link.classList.toggle('nav-ativo', match);
+    });
+  }
+
+  // Usa IntersectionObserver com rootMargin para detectar qual seção está
+  // ocupando a maior parte da viewport (topo da tela)
+  const observerOpcoes = {
+    threshold: 0,
+    rootMargin: '-10% 0px -75% 0px'   // considera seção ativa quando cruza os 10–25% superiores
+  };
+
+  // Mantém controle de quais seções estão "visíveis" no intervalo definido
+  const visiveis = new Set();
 
   const navObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        navLinks.forEach(link => {
-          link.style.color = link.getAttribute('href') === '#' + entry.target.id
-            ? '#fff'
-            : 'rgba(255,255,255,.7)';
-        });
+        visiveis.add(entry.target.id);
+      } else {
+        visiveis.delete(entry.target.id);
       }
     });
-  }, { threshold: 0.4 });
+
+    // Usa a primeira seção visível na ordem do DOM como ativa
+    if (visiveis.size > 0) {
+      const primeiraAtiva = sections.find(s => visiveis.has(s.id));
+      if (primeiraAtiva) atualizarAtivo(primeiraAtiva.id);
+    }
+  }, observerOpcoes);
 
   sections.forEach(s => navObserver.observe(s));
+
+  // Ativa "inicio" por padrão ao carregar
+  atualizarAtivo('inicio');
 }
 
 // ─── FORMULÁRIO DE CONTATO ────────────────────────────────────────────────────
