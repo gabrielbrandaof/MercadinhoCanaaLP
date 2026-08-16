@@ -43,7 +43,10 @@
 
 /* ─── RESET ─────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 92px;
+}
 body {
   font-family: var(--font-ui);
   font-size: 16px;
@@ -552,6 +555,7 @@ nav { display: none; }
 #produtos {
   background: var(--white);
   padding: var(--s9) 0;
+  scroll-margin-top: 92px;
 }
 
 .produtos-header { margin-bottom: var(--s7); }
@@ -696,7 +700,7 @@ nav { display: none; }
 }
 .categoria-bloco {
   margin-bottom: var(--s8);
-  scroll-margin-top: var(--s8);
+  scroll-margin-top: 92px;
 }
 .categoria-header {
   display: flex;
