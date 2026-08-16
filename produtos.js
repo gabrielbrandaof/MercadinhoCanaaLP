@@ -126,10 +126,10 @@ const catalogoProdutos = {
         selo: ""
       },
       {
-        nome: "Docinho Bauducco",
+        nome: "Bolinho Bauducco",
         preco: "R$ 2,84",
         unidade: "40g",
-        imagem: "🍬",
+        imagem: "img/bolinhobauducco.jpg",
         descricao: "Doce e saboroso, perfeito para adoçar o dia.",
         destaque: false,
         selo: ""
@@ -164,7 +164,7 @@ const catalogoProdutos = {
         nome: "Folheados de Queijo",
         preco: "R$ 6,00",
         unidade: "un",
-        imagem: "🥖",
+        imagem: "img/folheadoqueijo.jpg",
         descricao: "Massa crocante e dourada, recheada com queijo cremoso e saboroso.",
         destaque: true,
         selo: ""
@@ -376,7 +376,7 @@ const catalogoProdutos = {
       {
         nome: "Sabão em Pó Tixan",
         preco: "R$ 6,60",
-        unidade: "un",
+        unidade: "400g",
         imagem: "img/sabaoempotixan.jpg",
         descricao: "Remove manchas e deixa as roupas com cheiro agradável.",
         destaque: false,
@@ -457,7 +457,7 @@ const catalogoProdutos = {
         nome: "Absorvente Intimus",
         preco: "R$ 5,31",
         unidade: "8un",
-        imagem: "img/absorventeintimus.jpg",
+        imagem: "img/absorvente.jpg",
         descricao: "Proteção segura e confortável para o dia a dia.",
         destaque: false,
         selo: ""
@@ -517,28 +517,19 @@ const catalogoProdutos = {
       },
       {
         nome: "Leite Condensado Zero Lactose",
-        preco: "R$ 0,00",
+        preco: "R$ 8,89",
         unidade: "un",
-        imagem: "🍮",
+        imagem: "img/leitecondslac.jpg",
         descricao: "Todo o sabor do leite condensado, sem lactose.",
         destaque: false,
         selo: ""
       },
       {
         nome: "Creme de Leite Zero Lactose",
-        preco: "R$ 0,00",
+        preco: "R$ 5,70",
         unidade: "un",
-        imagem: "🍦",
+        imagem: "img/cremedeleitesemlac.jpg",
         descricao: "Cremoso e saboroso, sem lactose.",
-        destaque: false,
-        selo: ""
-      },
-      {
-        nome: "Leite em Pó Zero Lactose",
-        preco: "R$ 0,00",
-        unidade: "un",
-        imagem: "🥛",
-        descricao: "Nutritivo e saboroso, sem lactose.",
         destaque: false,
         selo: ""
       }
