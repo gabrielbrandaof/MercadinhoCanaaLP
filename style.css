@@ -698,14 +698,43 @@ nav { display: none; }
   margin-bottom: var(--s8);
   scroll-margin-top: var(--s8);
 }
+.categoria-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  margin-bottom: var(--s5);
+  padding-bottom: var(--s3);
+  border-bottom: 1px solid var(--border);
+}
 .categoria-titulo {
   font-family: var(--font-display);
   font-size: 24px;
   font-weight: 700;
   color: var(--green);
-  margin-bottom: var(--s5);
-  padding-bottom: var(--s3);
-  border-bottom: 1px solid var(--border);
+  margin: 0;
+}
+.categoria-voltar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(13, 69, 45, 0.14);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--green);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.categoria-voltar:hover,
+.categoria-voltar:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(13, 69, 45, 0.12);
+  border-color: rgba(13, 69, 45, 0.25);
+  outline: none;
 }
 
 /* ─── OFERTAS DA SEMANA ─────────────────────────────────── */

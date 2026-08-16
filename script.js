@@ -225,9 +225,20 @@ function renderizarCategorias() {
 
     html += `
       <div class="categoria-bloco" id="categoria-${chave}">
-        <h3 class="categoria-titulo">
-          <span aria-hidden="true">${cat.emoji}</span> ${cat.nome}
-        </h3>
+        <div class="categoria-header">
+          <h3 class="categoria-titulo">
+            <span aria-hidden="true">${cat.emoji}</span> ${cat.nome}
+          </h3>
+          <button
+            type="button"
+            class="categoria-voltar"
+            aria-label="Voltar para todas as categorias"
+            title="Voltar para todas as categorias"
+            onclick="voltarParaCategorias()"
+          >
+            <span aria-hidden="true">↑</span>
+          </button>
+        </div>
         <div class="produtos-grid">${cardsHtml}</div>
       </div>
     `;
@@ -240,7 +251,16 @@ function irParaCategoria(chaveCategoria) {
   const alvo = document.getElementById('categoria-' + chaveCategoria);
   if (alvo) alvo.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+/** Rola até o topo das categorias para visualizar todas */
+function voltarParaCategorias() {
+  const categorias = document.querySelector('.categories-grid');
+  if (categorias) {
+    categorias.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
 window.irParaCategoria = irParaCategoria;
+window.voltarParaCategorias = voltarParaCategorias;
 
 // ─── CARRINHO DE COMPRAS ──────────────────────────────────────────────────────
 
