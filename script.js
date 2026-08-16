@@ -382,7 +382,7 @@ function enviarPedidoWhatsApp() {
 
   carrinho.forEach(item => {
     const subtotal = numeroParaPreco(item.preco * item.quantidade);
-    linhas.push(`${item.imagem} *${item.nome}*`);
+    linhas.push(`*${item.nome}*`);
     linhas.push(`   ${item.quantidade}x ${item.precoFormatado}/${item.unidade} = ${subtotal}`);
   });
 
