@@ -1482,3 +1482,129 @@ body.carrinho-aberto { overflow: hidden; }
   box-shadow: 0 8px 24px rgba(37,211,102,.4);
 }
 .btn-whatsapp:active { transform: translateY(0); }
+/* ─── BARRA DE PESQUISA ─────────────────────────────────── */
+.busca-wrapper {
+  margin: var(--s6) 0 var(--s5);
+}
+
+.busca-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  background: var(--white);
+  border: 2px solid var(--border);
+  border-radius: var(--r-pill);
+  padding: var(--s3) var(--s5);
+  box-shadow: var(--shadow-card);
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.busca-inner:focus-within {
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px rgba(0,67,46,.10), var(--shadow-card);
+}
+
+.busca-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.busca-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: var(--font-ui);
+  font-size: 16px;
+  color: var(--text);
+  background: transparent;
+  min-width: 0;
+}
+
+.busca-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Remove o "x" nativo do input[type=search] */
+.busca-input::-webkit-search-cancel-button { display: none; }
+.busca-input::-ms-clear { display: none; }
+
+.busca-limpar {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--border);
+  color: var(--text-muted);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .18s, color .18s;
+}
+
+.busca-limpar:hover {
+  background: var(--green);
+  color: var(--white);
+}
+
+.busca-resultado-info {
+  margin-top: var(--s3);
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 0 var(--s2);
+}
+
+.busca-resultado-info strong {
+  color: var(--green);
+}
+
+/* Grid de resultados da busca */
+.busca-resultados {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--s5);
+  margin-bottom: var(--s7);
+}
+
+/* Mensagem de nenhum resultado */
+.busca-vazio {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--s8) var(--s5);
+  color: var(--text-muted);
+}
+
+.busca-vazio-emoji {
+  font-size: 48px;
+  display: block;
+  margin-bottom: var(--s4);
+}
+
+.busca-vazio p {
+  font-size: 16px;
+  margin-bottom: var(--s2);
+}
+
+.busca-vazio-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* Destaque do termo encontrado nos cards */
+.busca-highlight {
+  background: var(--yellow);
+  color: var(--green-dark);
+  border-radius: 3px;
+  padding: 0 2px;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .busca-inner {
+    padding: var(--s3) var(--s4);
+  }
+  .busca-input {
+    font-size: 15px;
+  }
+}

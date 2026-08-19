@@ -262,6 +262,136 @@ function voltarParaCategorias() {
 window.irParaCategoria = irParaCategoria;
 window.voltarParaCategorias = voltarParaCategorias;
 
+// ─── PESQUISA DE PRODUTOS ─────────────────────────────────────────────────────
+
+/**
+ * Normaliza texto para comparação: remove acentos, converte para minúsculas
+ * e elimina espaços extras. Permite encontrar "Açafrão" buscando "acafrao".
+ */
+function normalizar(str) {
+  return str
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
+}
+
+/**
+ * Verifica se o termo de busca tem correspondência aproximada com o alvo.
+ * Usa dois critérios:
+ *   1. Inclusão simples (o alvo contém o termo)
+ *   2. Todas as palavras do termo aparecem no alvo (permite "coca zero" → "Coca Cola Zero")
+ */
+function temCorrespondencia(alvo, termo) {
+  const alvoN = normalizar(alvo);
+  const termoN = normalizar(termo);
+  if (alvoN.includes(termoN)) return true;
+  // Busca por cada palavra individualmente
+  const palavras = termoN.split(/\s+/).filter(Boolean);
+  return palavras.every(p => alvoN.includes(p));
+}
+
+/**
+ * Destaca visualmente o trecho encontrado no texto do card.
+ * Retorna o texto com <mark class="busca-highlight"> ao redor da correspondência.
+ */
+function destacarTermo(texto, termo) {
+  if (!termo) return texto;
+  // Monta regex sem acentos para localizar posição
+  const escapado = normalizar(termo).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  // Tenta encontrar correspondência no texto original (com acentos)
+  const textoN = normalizar(texto);
+  const match = textoN.match(new RegExp(escapado));
+  if (!match) return texto;
+  const inicio = match.index;
+  const fim = inicio + match[0].length;
+  return (
+    texto.slice(0, inicio) +
+    `<mark class="busca-highlight">${texto.slice(inicio, fim)}</mark>` +
+    texto.slice(fim)
+  );
+}
+
+/** Executa a pesquisa e atualiza o DOM */
+function pesquisarProdutos(termo) {
+  const container = document.getElementById('busca-resultados');
+  const info = document.getElementById('busca-resultado-info');
+  const listaCategorias = document.getElementById('lista-produtos-categorias');
+  const btnLimpar = document.getElementById('busca-limpar');
+
+  if (!container || !info || !listaCategorias) return;
+
+  const termoLimpo = termo.trim();
+
+  // Exibe ou esconde o botão de limpar
+  if (btnLimpar) btnLimpar.style.display = termoLimpo ? 'flex' : 'none';
+
+  // Se o campo estiver vazio, restaura a listagem normal
+  if (!termoLimpo) {
+    container.style.display = 'none';
+    container.innerHTML = '';
+    info.style.display = 'none';
+    listaCategorias.style.display = '';
+    return;
+  }
+
+  // Esconde a lista de categorias para dar lugar aos resultados
+  listaCategorias.style.display = 'none';
+
+  // Varre todos os produtos buscando correspondências
+  const resultados = [];
+  for (const chave in catalogoProdutos) {
+    const cat = catalogoProdutos[chave];
+    cat.itens.forEach(produto => {
+      const textosBusca = [produto.nome, produto.descricao, cat.nome];
+      if (textosBusca.some(t => temCorrespondencia(t, termoLimpo))) {
+        resultados.push({ produto, cat, chave });
+      }
+    });
+  }
+
+  // Monta o HTML dos resultados
+  if (resultados.length === 0) {
+    container.innerHTML = `
+      <div class="busca-vazio">
+        <span class="busca-vazio-emoji" aria-hidden="true">🔍</span>
+        <p>Nenhum produto encontrado para <strong>"${termoLimpo}"</strong>.</p>
+        <p class="busca-vazio-sub">Tente um nome diferente ou navegue pelas categorias abaixo.</p>
+      </div>
+    `;
+    info.innerHTML = `Nenhum resultado para <strong>"${termoLimpo}"</strong>`;
+  } else {
+    // Cria os cards com destaque no nome
+    container.innerHTML = resultados.map(({ produto, cat, chave }) => {
+      // Gera o card normalmente e depois aplica o destaque no nome
+      const cardHtml = criarCardProduto(produto, cat.nome, chave);
+      // Substitui o nome no card pelo nome destacado
+      const nomeDestacado = destacarTermo(produto.nome, termoLimpo);
+      return cardHtml.replace(
+        `<h3 class="produto-name">${produto.nome}</h3>`,
+        `<h3 class="produto-name">${nomeDestacado}</h3>`
+      );
+    }).join('');
+    info.innerHTML = `<strong>${resultados.length} produto${resultados.length !== 1 ? 's' : ''}</strong> encontrado${resultados.length !== 1 ? 's' : ''} para <strong>"${termoLimpo}"</strong>`;
+  }
+
+  container.style.display = 'grid';
+  info.style.display = 'block';
+}
+
+/** Limpa a pesquisa e restaura a listagem normal */
+function limparPesquisa() {
+  const input = document.getElementById('busca-input');
+  if (input) {
+    input.value = '';
+    input.focus();
+  }
+  pesquisarProdutos('');
+}
+
+window.pesquisarProdutos = pesquisarProdutos;
+window.limparPesquisa = limparPesquisa;
+
 // ─── CARRINHO DE COMPRAS ──────────────────────────────────────────────────────
 
 /** Abre/fecha o painel lateral do carrinho */

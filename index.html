@@ -203,6 +203,33 @@
           </div>
         </div>
 
+        <!-- ▸ BARRA DE PESQUISA -->
+        <div class="busca-wrapper reveal" role="search" aria-label="Pesquisar produtos">
+          <div class="busca-inner">
+            <span class="busca-icon" aria-hidden="true">🔍</span>
+            <input
+              type="search"
+              id="busca-input"
+              class="busca-input"
+              placeholder="Pesquisar produto… ex: coca-cola, arroz, sabão"
+              autocomplete="off"
+              aria-label="Pesquisar produtos"
+              oninput="pesquisarProdutos(this.value)"
+            />
+            <button
+              class="busca-limpar"
+              id="busca-limpar"
+              aria-label="Limpar pesquisa"
+              onclick="limparPesquisa()"
+              style="display:none"
+            >✕</button>
+          </div>
+          <div id="busca-resultado-info" class="busca-resultado-info" aria-live="polite" style="display:none"></div>
+        </div>
+
+        <!-- Resultados da pesquisa (injetados pelo script.js) -->
+        <div id="busca-resultados" class="busca-resultados" style="display:none"></div>
+
         <!--
           A lista completa de produtos, organizada por categoria, é montada
           automaticamente aqui pelo script.js lendo o catalogoProdutos (produtos.js).
